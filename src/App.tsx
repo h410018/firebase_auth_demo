@@ -1,11 +1,14 @@
 import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from './features/counter/counterSlice'
+import type { RootState } from './app/store'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const value = useSelector((state: RootState) => state.counter.value)
   return (
     <div className="App">
       <div>
@@ -17,6 +20,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <h2>value inside counterSlice: {value}</h2>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
