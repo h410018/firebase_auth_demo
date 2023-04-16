@@ -1,14 +1,18 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from './features/counter/counterSlice'
 import type { RootState } from './app/store'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { AuthContext } from './context/AuthContext'
+
 
 function App() {
   const [count, setCount] = useState(0)
   const value = useSelector((state: RootState) => state.counter.value)
+  const { googleSignIn, googleSignOut, isSignIn } = useContext(AuthContext)
+
   return (
     <div className="App">
       <div>
@@ -32,6 +36,19 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      isSign : { isSignIn ? 
+        (<span>true</span>): 
+        (<span>false
+            <button onClick={() => googleSignIn()}>
+              Google sign in
+            </button>
+          </span>
+        )
+      }
+    
+      <button onClick={() => googleSignOut()}>
+         Google signout
+      </button>
     </div>
   )
 }
